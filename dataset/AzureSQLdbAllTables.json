@@ -1,0 +1,16 @@
+{
+	"name": "AzureSQLdbAllTables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDBConnection1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ac_test"
+		}
+	}
+}
