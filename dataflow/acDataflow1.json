@@ -1,0 +1,53 @@
+{
+	"name": "acDataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSQLDBTab1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          car_ID as string,",
+				"          symboling as string,",
+				"          CarName as string,",
+				"          fueltype as string,",
+				"          aspiration as string,",
+				"          doornumber as string,",
+				"          carbody as string,",
+				"          drivewheel as string,",
+				"          enginelocation as string,",
+				"          wheelbase as string,",
+				"          carlength as string,",
+				"          carwidth as string,",
+				"          carheight as string,",
+				"          curbweight as string,",
+				"          enginetype as string,",
+				"          cylindernumber as string,",
+				"          enginesize as string,",
+				"          fuelsystem as string,",
+				"          boreratio as string,",
+				"          stroke as string,",
+				"          compressionratio as string,",
+				"          horsepower as string,",
+				"          peakrpm as string,",
+				"          citympg as string,",
+				"          highwaympg as string,",
+				"          price as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1"
+			]
+		}
+	}
+}
