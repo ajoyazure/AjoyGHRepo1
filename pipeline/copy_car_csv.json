@@ -1,0 +1,360 @@
+{
+	"name": "copy_car_csv",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_evk",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "ajoyblob1//CarPrice_Assignment.csv"
+					},
+					{
+						"name": "Destination",
+						"value": ".CarPrice_Assignment"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "car_ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "car_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "symboling",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "symboling",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CarName",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CarName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "fueltype",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "fueltype",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "aspiration",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "aspiration",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "doornumber",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "doornumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "carbody",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "carbody",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "drivewheel",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "drivewheel",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "enginelocation",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "enginelocation",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "wheelbase",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "wheelbase",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "carlength",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "carlength",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "carwidth",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "carwidth",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "carheight",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "carheight",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "curbweight",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "curbweight",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "enginetype",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "enginetype",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "cylindernumber",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cylindernumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "enginesize",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "enginesize",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "fuelsystem",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "fuelsystem",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "boreratio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "boreratio",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "stroke",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "stroke",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "compressionratio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "compressionratio",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "horsepower",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "horsepower",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "peakrpm",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "peakrpm",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "citympg",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "citympg",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "highwaympg",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "highwaympg",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "price",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "price",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_evk",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_evk",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-12-16T05:27:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

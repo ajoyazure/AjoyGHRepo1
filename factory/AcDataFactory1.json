@@ -1,0 +1,9 @@
+{
+	"name": "AcDataFactory1",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ba38a6f1-dfc9-4461-8e8f-d1fd3a5d3ef4",
+		"tenantId": "e0839187-95ae-4ad7-a0fa-7c97ddc7f2a3"
+	}
+}

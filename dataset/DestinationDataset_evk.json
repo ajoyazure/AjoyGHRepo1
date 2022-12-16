@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_evk",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDBConnection1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "CarPrice_Assignment"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
