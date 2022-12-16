@@ -17,18 +17,20 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from [dbo].[CarPrice_Assignment]\nwhere car_id in (100,10000)",
+						"sqlReaderQuery": "select * from [dbo].[CarPrice_Assignment]",
 						"queryTimeout": "02:00:00",
 						"isolationLevel": "ReadCommitted",
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "ParquetSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "ParquetWriteSettings"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false,
@@ -49,7 +51,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "MyParquetFile1",
+						"referenceName": "DelimitedText1",
 						"type": "DatasetReference"
 					}
 				]
