@@ -1,0 +1,121 @@
+{
+	"name": "AzureSQLDBTab1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDBConnection1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "car_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "symboling",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CarName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fueltype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "aspiration",
+				"type": "nvarchar"
+			},
+			{
+				"name": "doornumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "carbody",
+				"type": "nvarchar"
+			},
+			{
+				"name": "drivewheel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "enginelocation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wheelbase",
+				"type": "nvarchar"
+			},
+			{
+				"name": "carlength",
+				"type": "nvarchar"
+			},
+			{
+				"name": "carwidth",
+				"type": "nvarchar"
+			},
+			{
+				"name": "carheight",
+				"type": "nvarchar"
+			},
+			{
+				"name": "curbweight",
+				"type": "nvarchar"
+			},
+			{
+				"name": "enginetype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cylindernumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "enginesize",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fuelsystem",
+				"type": "nvarchar"
+			},
+			{
+				"name": "boreratio",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stroke",
+				"type": "nvarchar"
+			},
+			{
+				"name": "compressionratio",
+				"type": "nvarchar"
+			},
+			{
+				"name": "horsepower",
+				"type": "nvarchar"
+			},
+			{
+				"name": "peakrpm",
+				"type": "nvarchar"
+			},
+			{
+				"name": "citympg",
+				"type": "nvarchar"
+			},
+			{
+				"name": "highwaympg",
+				"type": "nvarchar"
+			},
+			{
+				"name": "price",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CarPrice_Assignment"
+		}
+	}
+}
