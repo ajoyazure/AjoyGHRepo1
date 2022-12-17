@@ -9,7 +9,7 @@
 						"referenceName": "AzureSQLDBTab1",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "TableToFileData"
 				}
 			],
 			"sinks": [],
@@ -45,8 +45,12 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1"
+				"     isolationLevel: 'READ_COMMITTED',",
+				"     query: 'select * from [dbo].[CarPrice_Assignment]',",
+				"     format: 'query',",
+				"     partitionBy('dynamicRange', 10,",
+				"          CarName",
+				"     )) ~> TableToFileData"
 			]
 		}
 	}
