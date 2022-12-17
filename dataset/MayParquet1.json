@@ -1,0 +1,19 @@
+{
+	"name": "MayParquet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "contadls1"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

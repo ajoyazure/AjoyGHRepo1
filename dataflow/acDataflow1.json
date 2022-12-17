@@ -12,8 +12,20 @@
 					"name": "TableToFileData"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MayParquet1",
+						"type": "DatasetReference"
+					},
+					"name": "Target"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedGetColumns"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          car_ID as string,",
@@ -50,7 +62,16 @@
 				"     format: 'query',",
 				"     partitionBy('dynamicRange', 10,",
 				"          CarName",
-				"     )) ~> TableToFileData"
+				"     )) ~> TableToFileData",
+				"TableToFileData derive(CarWithPrice = concat(CarName,' (', price , ')')) ~> DerivedGetColumns",
+				"DerivedGetColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> Target"
 			]
 		}
 	}
