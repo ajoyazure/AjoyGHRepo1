@@ -1,0 +1,1066 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "AcDataFactory1"
+		},
+		"AzureBlobConnection1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobConnection1'"
+		},
+		"AzureSqlDBConnection1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDBConnection1'"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://ajoystorageadls1.dfs.core.windows.net/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/copy_car_csv')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_evk",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "ajoyblob1//CarPrice_Assignment.csv"
+							},
+							{
+								"name": "Destination",
+								"value": ".CarPrice_Assignment"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 0
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "car_ID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "car_ID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "symboling",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "symboling",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CarName",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CarName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "fueltype",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "fueltype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "aspiration",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "aspiration",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "doornumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "doornumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "carbody",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "carbody",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "drivewheel",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "drivewheel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "enginelocation",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "enginelocation",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "wheelbase",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "wheelbase",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "carlength",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "carlength",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "carwidth",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "carwidth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "carheight",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "carheight",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "curbweight",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "curbweight",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "enginetype",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "enginetype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "cylindernumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "cylindernumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "enginesize",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "enginesize",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "fuelsystem",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "fuelsystem",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "boreratio",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "boreratio",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "stroke",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "stroke",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "compressionratio",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "compressionratio",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "horsepower",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "horsepower",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "peakrpm",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "peakrpm",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "citympg",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "citympg",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "highwaympg",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "highwaympg",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "price",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "price",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_evk",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_evk",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-12-16T05:27:27Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_evk')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_evk')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_evk')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDBConnection1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": "CarPrice_Assignment"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDBConnection1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_evk')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobConnection1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "CarPrice_Assignment.csv",
+						"container": "ajoyblob1"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "car_ID",
+						"type": "String"
+					},
+					{
+						"name": "symboling",
+						"type": "String"
+					},
+					{
+						"name": "CarName",
+						"type": "String"
+					},
+					{
+						"name": "fueltype",
+						"type": "String"
+					},
+					{
+						"name": "aspiration",
+						"type": "String"
+					},
+					{
+						"name": "doornumber",
+						"type": "String"
+					},
+					{
+						"name": "carbody",
+						"type": "String"
+					},
+					{
+						"name": "drivewheel",
+						"type": "String"
+					},
+					{
+						"name": "enginelocation",
+						"type": "String"
+					},
+					{
+						"name": "wheelbase",
+						"type": "String"
+					},
+					{
+						"name": "carlength",
+						"type": "String"
+					},
+					{
+						"name": "carwidth",
+						"type": "String"
+					},
+					{
+						"name": "carheight",
+						"type": "String"
+					},
+					{
+						"name": "curbweight",
+						"type": "String"
+					},
+					{
+						"name": "enginetype",
+						"type": "String"
+					},
+					{
+						"name": "cylindernumber",
+						"type": "String"
+					},
+					{
+						"name": "enginesize",
+						"type": "String"
+					},
+					{
+						"name": "fuelsystem",
+						"type": "String"
+					},
+					{
+						"name": "boreratio",
+						"type": "String"
+					},
+					{
+						"name": "stroke",
+						"type": "String"
+					},
+					{
+						"name": "compressionratio",
+						"type": "String"
+					},
+					{
+						"name": "horsepower",
+						"type": "String"
+					},
+					{
+						"name": "peakrpm",
+						"type": "String"
+					},
+					{
+						"name": "citympg",
+						"type": "String"
+					},
+					{
+						"name": "highwaympg",
+						"type": "String"
+					},
+					{
+						"name": "price",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobConnection1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobConnection1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobConnection1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDBConnection1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDBConnection1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Test_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "db to parquet data copy",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select * from [dbo].[CarPrice_Assignment]",
+								"queryTimeout": "02:00:00",
+								"isolationLevel": "ReadCommitted",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSQLDBTab1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureSQLDBTab1')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSQLDBTab1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDBConnection1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "car_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "symboling",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CarName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fueltype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "aspiration",
+						"type": "nvarchar"
+					},
+					{
+						"name": "doornumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "carbody",
+						"type": "nvarchar"
+					},
+					{
+						"name": "drivewheel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "enginelocation",
+						"type": "nvarchar"
+					},
+					{
+						"name": "wheelbase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "carlength",
+						"type": "nvarchar"
+					},
+					{
+						"name": "carwidth",
+						"type": "nvarchar"
+					},
+					{
+						"name": "carheight",
+						"type": "nvarchar"
+					},
+					{
+						"name": "curbweight",
+						"type": "nvarchar"
+					},
+					{
+						"name": "enginetype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cylindernumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "enginesize",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fuelsystem",
+						"type": "nvarchar"
+					},
+					{
+						"name": "boreratio",
+						"type": "nvarchar"
+					},
+					{
+						"name": "stroke",
+						"type": "nvarchar"
+					},
+					{
+						"name": "compressionratio",
+						"type": "nvarchar"
+					},
+					{
+						"name": "horsepower",
+						"type": "nvarchar"
+					},
+					{
+						"name": "peakrpm",
+						"type": "nvarchar"
+					},
+					{
+						"name": "citympg",
+						"type": "nvarchar"
+					},
+					{
+						"name": "highwaympg",
+						"type": "nvarchar"
+					},
+					{
+						"name": "price",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CarPrice_Assignment"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDBConnection1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/acDataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "AzureSQLDBTab1",
+								"type": "DatasetReference"
+							},
+							"name": "TableToFileData"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MayParquet1",
+								"type": "DatasetReference"
+							},
+							"name": "Target"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedGetColumns"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          car_ID as string,",
+						"          symboling as string,",
+						"          CarName as string,",
+						"          fueltype as string,",
+						"          aspiration as string,",
+						"          doornumber as string,",
+						"          carbody as string,",
+						"          drivewheel as string,",
+						"          enginelocation as string,",
+						"          wheelbase as string,",
+						"          carlength as string,",
+						"          carwidth as string,",
+						"          carheight as string,",
+						"          curbweight as string,",
+						"          enginetype as string,",
+						"          cylindernumber as string,",
+						"          enginesize as string,",
+						"          fuelsystem as string,",
+						"          boreratio as string,",
+						"          stroke as string,",
+						"          compressionratio as string,",
+						"          horsepower as string,",
+						"          peakrpm as string,",
+						"          citympg as string,",
+						"          highwaympg as string,",
+						"          price as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_COMMITTED',",
+						"     query: 'select * from [dbo].[CarPrice_Assignment]',",
+						"     format: 'query',",
+						"     partitionBy('dynamicRange', 10,",
+						"          CarName",
+						"     )) ~> TableToFileData",
+						"TableToFileData derive(CarWithPrice = concat(CarName,' (', price , ')')) ~> DerivedGetColumns",
+						"DerivedGetColumns sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> Target"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureSQLDBTab1')]",
+				"[concat(variables('factoryId'), '/datasets/MayParquet1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MyParquetFile1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobConnection1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "ajoyblob2"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobConnection1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PipelineForEach')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup1",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select TABLE_NAME from \"ajoy-db-sql\".information_schema.tables\nwhere table_schema = 'dbo'\n",
+								"queryTimeout": "02:00:00",
+								"isolationLevel": "ReadCommitted",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "AzureSQLdbAllTables",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureSQLdbAllTables')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSQLdbAllTables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDBConnection1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDBConnection1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MayParquet1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "contadls1"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Car_Parquet_file')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "acDataflow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "acDataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"TableToFileData": {},
+									"Target": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/acDataflow1')]"
+			]
+		}
+	]
+}
